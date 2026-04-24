@@ -37,9 +37,88 @@ $$V_{out} = -\left( \frac{R_f}{R_1}x_1 + \frac{R_f}{R_2}x_2 \right)$$
 <img width="1020" height="492" alt="image" src="https://github.com/user-attachments/assets/fb0d8162-4956-48bf-a5d3-9eae2db4d998" />
 
 
+---
+
+## Technical Specifications
+- **Op-Amp:** LM741 / TL081 (or equivalent)
+- **Supply Voltage ($V_{CC}$):** $\pm 12\text{V}$
+- **Input Conditions:** $x_1 = +0.5\text{V}$, $x_2 = +0.5\text{V}$
+
+### Expected Simulation Results
+| Task | Calculated Output |
+| :--- | :--- |
+| **Part (a)** | $-3.0\text{V}$ |
+
+
+## DC Analysis
+
+<img width="1505" height="856" alt="image" src="https://github.com/user-attachments/assets/ffb00391-3528-4930-8eaf-061872d0cbb2" />
+
+## Simulation Results: DC Operating Point Analysis (Part A)
+
+The circuit for ($y_1(t) = -[5x_1(t) + x_2(t)]$) was simulated using LTspice with a $\mu A741$ Op-Amp model in an **Inverting Summing Amplifier** configuration.
+
+### Simulation Parameters
+- **Inputs:** $V_x = 0.5\text{ V}$, $V_y = 0.5\text{ V}$ (labeled as V7 and V8 in schematic)
+- **Supply:** $\pm 12\text{ V}$
+- **Command:** `.op`
+
+### Results Interpretation
+
+| Parameter | Simulated Value | Theoretical Value | Deviation |
+| :--- | :--- | :--- | :--- |
+| **V(vout)** | $-2.99896\text{ V}$ | $-3.00\text{ V}$ | $0.034\%$ |
+| **V(n001)** | $34.5\ \mu\text{V}$ | $0\text{ V}$ (Virtual Ground) | Negligible |
+
+#### 1. Output Voltage Accuracy
+The mathematical design for Part A is:
+$$V_{out} = -\left( \frac{R_5}{R_7}V_y + \frac{R_5}{R_6}V_x \right)$$
+$$V_{out} = -\left( \frac{10\text{k}}{2\text{k}}(0.5) + \frac{10\text{k}}{10\text{k}}(0.5) \right) = -(2.5 + 0.5) = -3.0\text{ V}$$
+The simulated value of **$-2.99896\text{ V}$** confirms the resistor ratios ($5:1$) are correctly weighting the inputs.
+
+#### 2. Virtual Ground Verification
+Node `V(n001)` represents the inverting terminal input. In an ideal inverting amplifier, this should be at $0\text{ V}$ (Virtual Ground).
+- **Simulated Node Voltage:** $34.5028\ \mu\text{V}$
+This extremely low voltage (in the microvolt range) validates that the negative feedback is working correctly, maintaining the inverting terminal very close to ground potential.
+
+#### 3. Current Distribution Analysis
+- **Input Current $I(R_7)$:** $0.25\text{ mA}$ (Calculated: $0.5\text{ V}/2\text{k} = 0.25\text{ mA}$)
+- **Input Current $I(R_6)$:** $0.05\text{ mA}$ (Calculated: $0.5\text{ V}/10\text{k} = 0.05\text{ mA}$)
+- **Feedback Current $I(R_5)$:** $\approx 0.30\text{ mA}$ 
+The simulation shows $I(R_5) = I(R_7) + I(R_6)$, satisfying Kirchhoff’s Current Law (KCL) at the summing node.
+
+---
+### Conclusion
+The DC analysis for Part A proves that the inverting summer configuration is highly accurate. The minor microvolt offset at the summing node is attributed to the non-ideal characteristics (input offset voltage and bias current) of the $\mu A741$ model.
+
+## Transient Analysis
+
+<img width="1918" height="852" alt="image" src="https://github.com/user-attachments/assets/853c9499-8f18-4bc4-bc39-ea654094a67b" />
+
+## Transient Analysis (.tran) - Part A
+
+A transient simulation was conducted over a **5ms** interval to verify the time-domain stability and output accuracy of the inverting summer circuit ($y_1(t) = -[5x(t) + y(t)]$).
+
+### Waveform Interpretation
+
+| Trace | Label | Voltage Level |
+| :--- | :--- | :--- |
+| **V(x)** | Green Trace | $+0.5\text{V}$ (DC Input) |
+| **V(y)** | Blue Trace | $+0.5\text{V}$ (DC Input) |
+| **V(vout)** | Red Trace | $-3.0\text{V}$ (Steady State) |
+
+#### 1. Transfer Function Verification
+The simulation results confirm the intended mathematical operation:
+$$V_{out} = -\left( \frac{R_5}{R_6}V_x + \frac{R_5}{R_7}V_y \right)$$
+$$V_{out} = -(1 \cdot 0.5\text{V} + 5 \cdot 0.5\text{V}) = -3.0\text{V}$$
+The plot shows the output (red line) exactly at the **$-3.0\text{V}$** division, validating the gain coefficients for both input channels.
 
 
 ---
+### Conclusion
+The transient analysis for Part A successfully demonstrates the circuit's ability to sum multiple DC signals with specific gains. The results are consistent with the DC operating point analysis and confirm the theoretical design parameters.
+
+
 
 ## 2. Design circuit B: Difference Amplifier
 **Target Equation:** $y_2(t) = x_1(t) - 3x_2(t)$
@@ -75,18 +154,11 @@ If we choose $R_4 = 10 \text{ k}\Omega$, then $R_3 = 30 \text{ k}\Omega$.
 
 ---
 
-## Technical Specifications
-- **Op-Amp:** LM741 / TL081 (or equivalent)
-- **Supply Voltage ($V_{CC}$):** $\pm 12\text{V}$
-- **Input Conditions:** $x_1 = +0.5\text{V}$, $x_2 = +0.5\text{V}$
-
 ### Expected Simulation Results
 | Task | Calculated Output |
 | :--- | :--- |
-| **Part (a)** | $-3.0\text{V}$ |
 | **Part (b)** | $-1.0\text{V}$ |
 
-## DC Analysis
 
 ### Simulation Results: DC Operating Point Analysis (Part B)
 
@@ -148,5 +220,31 @@ As shown in the graph, the vertical distance between the inputs ($+0.5\text{V}$)
 Both the **DC Operating Point** and **Transient Analysis** successfully validate the design. The circuit accurately implements the mathematical function $y_2(t) = x_1(t) - 3x_2(t)$ with high precision and stability.
 
 ---
+
+## Final Inference and Conclusion
+
+The experiment successfully demonstrated the design and validation of Operational Amplifier circuits for performing specific mathematical operations: weighted summation (Inverting Summer) and subtraction (Difference Amplifier).
+
+### 1. Design Validation
+The theoretical calculations using standard Op-Amp topologies were verified through LTspice simulation. The resistor ratios $R_f/R_{in}$ accurately controlled the gain coefficients for each input variable ($x_1, x_2, x_3$).
+
+* **Part A (Inverting Summer):** Effectively implemented $y_1(t) = -[5x_1(t) + x_2(t)]$. The simulation yielded $-2.998\text{V}$ against a theoretical $-3.0\text{V}$.
+* **Part B (Difference Amplifier):** Effectively implemented $y_2(t) = x_1(t) - 3x_2(t)$. The simulation yielded $-0.999\text{V}$ against a theoretical $-1.0\text{V}$.
+
+### 2. Practical Observations
+* **Virtual Ground & Short:** The DC analysis confirmed the "Virtual Ground" at the inverting terminal for Part A and the "Virtual Short" ($V_+ \approx V_-$) for Part B, validating the core principles of negative feedback.
+* **Non-Ideal Effects:** A minor deviation (in the microvolt to millivolt range) was observed between theoretical and simulated values. This is attributed to the **Input Bias Current** and **Input Offset Voltage** inherent in the $\mu A741$ bipolar op-amp model. 
+* **Stability:** The Transient Analysis confirmed that both circuits are stable under DC conditions, showing no signs of oscillation or DC drift within the $5\text{ms}$ simulation window.
+
+### 3. Summary of Results
+
+| Experiment Part | Operation | Theoretical $V_{out}$ | Simulated $V_{out}$ | Error % |
+| :--- | :--- | :--- | :--- | :--- |
+| **Task A** | Inverting Summation | $-3.00\text{V}$ | $-2.998\text{V}$ | $0.06\%$ |
+| **Task B** | Subtraction | $-1.00\text{V}$ | $-0.999\text{V}$ | $0.10\%$ |
+
+### Final Remark
+Operational amplifiers provide a robust and highly accurate method for analog signal processing. By carefully selecting resistor networks, complex linear equations can be solved in real-time without the need for digital processing. The high degree of correlation between our mathematical models and the LTspice simulations confirms the reliability of these analog computing blocks for engineering applications.
+
 
 
