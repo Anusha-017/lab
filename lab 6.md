@@ -1,5 +1,37 @@
 # LAB-06: Design the Circuit Using Op-Amp 
 
+## Theory 
+
+## 1. Introduction
+Operational Amplifiers (Op-Amps) are high-gain electronic voltage amplifiers with differential inputs and, usually, a single-ended output. In this experiment, the Op-Amp is used as a **Linear Mathematical Element**. By utilizing negative feedback, the closed-loop gain of the circuit is determined almost entirely by external components (resistors), independent of the Op-Amp's internal high open-loop gain.
+
+## 2. Inverting Summing Amplifier (Part A)
+The inverting summer is an Op-Amp circuit that can add multiple input signals, each weighted by a specific gain. 
+
+### Working Principle
+Based on the **Virtual Ground** concept, the inverting terminal $(-)$ is maintained at approximately $0\text{V}$ because the non-inverting terminal $(+)$ is grounded. According to Kirchhoff’s Current Law (KCL), the sum of currents entering the summing node must equal the current flowing through the feedback resistor:
+$$I_{f} = I_{1} + I_{2} + ... + I_{n}$$
+
+Substituting Ohm's Law ($I = V/R$):
+$$\frac{0 - V_{out}}{R_f} = \frac{V_1 - 0}{R_1} + \frac{V_2 - 0}{R_2}$$
+
+This results in the transfer function:
+$$V_{out} = -\left( \frac{R_f}{R_1}V_1 + \frac{R_f}{R_2}V_2 \right)$$
+
+## 3. Difference Amplifier / Subtractor (Part B)
+A difference amplifier amplifies the voltage difference between two input signals while rejecting any common-mode signal.
+
+### Working Principle
+This circuit combines an inverting and a non-inverting configuration. 
+1. The voltage at the non-inverting terminal ($V_+$) is determined by a voltage divider:
+   $$V_+ = V_{in1} \left( \frac{R_4}{R_3 + R_4} \right)$$
+2. Due to **Virtual Short** behavior, the Op-Amp forces $V_- = V_+$.
+3. The output is then derived by considering the gain applied to this $V_+$ value minus the inverting path contribution.
+
+The general transfer function is:
+$$V_{out} = \left( \frac{R_4}{R_3 + R_4} \right) \left( 1 + \frac{R_f}{R_{in}} \right) V_{in1} - \left( \frac{R_f}{R_{in}} \right) V_{in2}$$
+
+For a standard subtractor where $R_{in} = R_3$ and $R_f = R_4$, the equation simplifies to $V_{out} = \frac{R_f}{R_{in}}(V_{in1} - V_{in2})$. However, by varying these ratios, we can achieve specific coefficients for each input.
 
 ## Simulation Specifications: 
 
@@ -116,9 +148,7 @@ The plot shows the output (red line) exactly at the **$-3.0\text{V}$** division,
 
 ---
 ### Conclusion
-The transient analysis for Part A successfully demonstrates the circuit's ability to sum multiple DC signals with specific gains. The results are consistent with the DC operating point analysis and confirm the theoretical design parameters.
-
-
+The transient analysis for Part A successfully demonstrates the circuit's ability to sum multiple DC signals with specific gains. The results are consistent with the DC operating point analysis and confirm the theoretical design parameters
 
 ## 2. Design circuit B: Difference Amplifier
 **Target Equation:** $y_2(t) = x_1(t) - 3x_2(t)$
