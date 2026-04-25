@@ -137,7 +137,7 @@ The most important observation is the phase shift.
 
 ###  Results and Observations
 
-### 6.1. Low-Frequency Gain (Bandband)
+### 6.1. Low-Frequency Gain (Bandpass)
 At low frequencies (below $100 \text{ Hz}$), the capacitor $C_F$ acts as an open circuit. The gain is dominated by the resistors:
 * **Theoretical DC Gain ($A_v$):** $20 \log_{10}(R_F / R_{in}) = 20 \log_{10}(10\text{k} / 1\text{k}) = 20 \text{ dB}$.
 * **Observation:** The simulation shows a flat passband at exactly **$20 \text{ dB}$**.
@@ -157,6 +157,25 @@ The frequency where the gain reaches $0 \text{ dB}$ is the unity-gain frequency.
 * **Theoretical $f_{unity}$:** $1 / (2 \pi R_{in} C_F) = 1 / (2 \pi \cdot 10^3 \cdot 100 \cdot 10^{-9}) \approx 1.59 \text{ kHz}$.
 * **Observation:** The plot crosses $0 \text{ dB}$ (magnitude axis) just past the $1.5 \text{ kHz}$ mark, matching the calculation.
 
+## 7. Inference 
+
+### 7.1. Summary of Results
+The simulation of the Practical Inverting Integrator yielded results that closely matched theoretical predictions. The circuit effectively performed integration on a $2.5\text{ kHz}$ sinusoidal input, producing a cosine output with a peak-to-peak voltage of approximately $1.27\text{ V}$.
+
+### 7.2 Summary Table:
+
+| Parameter | Simulated Value | Observation / Inference |
+| :--- | :--- | :--- |
+| **Input Waveform** | 1 V Sine Wave | Standard source at 2.5 kHz frequency. |
+| **Output Waveform (Bandpass)** | ~0.635 V Cosine | The integrated waveform; output is attenuated and phase-shifted. |
+| **Low-Frequency Gain** | 20 dB | Matches the resistor ratio (Rf/Rin) in the passband. |
+| **Unity Gain Frequency ($f_{unity}$)** | ~1.59 kHz | The point where the magnitude response crosses 0 dB. |
+| **Peak-to-Peak Voltage ($V_{p-p}$)** | 1.27 V | Total vertical swing from positive peak to negative peak. |
+| **Phase Shift** | 93.6° | Demonstrates effective integration with a 90° (+3.6°) shift. |
+
+
+### 7.3. Conclusion
+The experiment confirms that a practical integrator design successfully balances mathematical accuracy with electronic stability. The results validate the use of parallel feedback resistors for DC stabilization and non-inverting compensation resistors for bias current cancellation. The circuit is highly effective as a first-order low-pass filter and a time-domain integrator for signals above $160\text{ Hz}$.
 
 
 
