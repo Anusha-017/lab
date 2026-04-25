@@ -268,10 +268,10 @@ The theoretical calculations using standard Op-Amp topologies were verified thro
 
 ### 3. Summary of Results
 
-| Experiment Part | Operation | Theoretical $V_{out}$ | Simulated $V_{out}$ | Error % |
-| :--- | :--- | :--- | :--- | :--- |
-| **Task A** | Inverting Summation | $-3.00\text{V}$ | $-2.998\text{V}$ | $0.06\%$ |
-| **Task B** | Subtraction | $-1.00\text{V}$ | $-0.999\text{V}$ | $0.10\%$ |
+| Experiment Part | Operation | Theoretical $V_{out}$ | Simulated $V_{out}$ | 
+| :--- | :--- | :--- | :--- |
+| **Task A** | Inverting Summation | $-3.00\text{V}$ | $-2.998\text{V}$ |
+| **Task B** | Subtraction | $-1.00\text{V}$ | $-0.999\text{V}$ | 
 
 ### Final Remark
 Operational amplifiers provide a robust and highly accurate method for analog signal processing. By carefully selecting resistor networks, complex linear equations can be solved in real-time without the need for digital processing. The high degree of correlation between our mathematical models and the LTspice simulations confirms the reliability of these analog computing blocks for engineering applications.
