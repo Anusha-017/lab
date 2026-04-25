@@ -62,3 +62,5 @@ $$V_{out\_p} = \frac{1}{5000 \pi \times 10^{-4}} = \frac{1}{0.5 \pi} = \frac{2}{
 $$V_{out}(t) \approx 0.637 \cos(5000 \pi t) \text{ V}$$
 
 The theoretical analysis predicts an output waveform with a peak amplitude of approximately **637 mV**, shifted by **+90°** (cosine wave) relative to the input sine wave.
+
+
