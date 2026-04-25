@@ -246,7 +246,7 @@ As shown in the graph, the vertical distance between the inputs ($+0.5\text{V}$)
 
 
 ---
-### Final Conclusion
+### Conclusion
 Both the **DC Operating Point** and **Transient Analysis** successfully validate the design. The circuit accurately implements the mathematical function $y_2(t) = x_1(t) - 3x_2(t)$ with high precision and stability.
 
 ---
