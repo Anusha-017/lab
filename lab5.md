@@ -225,15 +225,15 @@ $$GBWP = 1.38\text{ MHz}$$
 
 **1. Verification of Closed-Loop Gain and Phase**
 The experiments successfully validated the theoretical gain equations for non-inverting op-amp configurations. 
-* In **Part D**, establishing a resistor ratio of $R_f/R_1 = 4$ accurately produced a voltage gain of exactly $5\text{ V/V}$ ($13.98\text{ dB}$). 
-* In **Part E**, replacing the feedback network with a direct short ($100\%$ negative feedback) yielded a perfect unity gain of $1\text{ V/V}$ ($0\text{ dB}$). 
+* In **Part A**, establishing a resistor ratio of $R_f/R_1 = 4$ accurately produced a voltage gain of exactly $5\text{ V/V}$ ($13.98\text{ dB}$). 
+* In **Part B**, replacing the feedback network with a direct short ($100\%$ negative feedback) yielded a perfect unity gain of $1\text{ V/V}$ ($0\text{ dB}$). 
 * Furthermore, both transient analyses confirmed a $0^\circ$ phase shift, proving that signals applied to the non-inverting terminal remain in phase at the output.
 
 
 **3. The Gain-Bandwidth Trade-off**
 The AC analyses of both circuits clearly demonstrated the constant nature of the Gain-Bandwidth Product (GBWP). There is an inherent trade-off between how much an op-amp can amplify a signal and the maximum frequency it can handle:
-* The amplifier in **Part D** (Gain = $5$) experienced an early roll-off, restricting its usable bandwidth to approximately **$211.7\text{ kHz}$**.
-* The voltage follower in **Part E** (Gain = $1$) has low voltage amplification to achieve maximum frequency response, extending its usable bandwidth to the op-amp's unity-gain frequency of approximately **$1.38\text{ MHz}$**.
+* The amplifier in **Part A** (Gain = $5$) experienced an early roll-off, restricting its usable bandwidth to approximately **$211.7\text{ kHz}$**.
+* The voltage follower in **Part B** (Gain = $1$) has low voltage amplification to achieve maximum frequency response, extending its usable bandwidth to the op-amp's unity-gain frequency of approximately **$1.38\text{ MHz}$**.
 
 **Final Summary:**
 The non-inverting amplifier is highly effective for magnifying signal voltage, provided the output remains within saturation limits. The voltage follower, while providing no voltage amplification, acts as an ideal buffer—offering maximum bandwidth, perfect signal tracking, high input impedance, and the ability to drive loads without drawing current from the signal source.
