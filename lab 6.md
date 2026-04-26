@@ -1,11 +1,11 @@
 # LAB-06: Design the Circuit Using Op-Amp 
 
-## Theory 
+## 1.Theory 
 
-## 1. Introduction
+## Introduction
 Operational Amplifiers (Op-Amps) are high-gain electronic voltage amplifiers with differential inputs and, usually, a single-ended output. In this experiment, the Op-Amp is used as a **Linear Mathematical Element**. By utilizing negative feedback, the closed-loop gain of the circuit is determined almost entirely by external components (resistors), independent of the Op-Amp's internal high open-loop gain.
 
-## 2. Inverting Summing Amplifier (Part A)
+## Inverting Summing Amplifier (Part A)
 The inverting summer is an Op-Amp circuit that can add multiple input signals, each weighted by a specific gain. 
 
 ### Working Principle
@@ -18,7 +18,7 @@ $$\frac{0 - V_{out}}{R_f} = \frac{V_1 - 0}{R_1} + \frac{V_2 - 0}{R_2}$$
 This results in the transfer function:
 $$V_{out} = -\left( \frac{R_f}{R_1}V_1 + \frac{R_f}{R_2}V_2 \right)$$
 
-## 3. Difference Amplifier / Subtractor (Part B)
+## Difference Amplifier / Subtractor (Part B)
 A difference amplifier amplifies the voltage difference between two input signals while rejecting any common-mode signal.
 
 ### Working Principle
@@ -47,13 +47,9 @@ For a standard subtractor where $R_{in} = R_3$ and $R_f = R_4$, the equation sim
 | **a** | y1(t) = -[5x1(t) + x2(t)] | Inverting Summing Amp |
 | **b** | y2(t) = x1(t) - 3x2(t) | Differential / Subtractor Amp |
 
-# Op-Amp Mathematical Operations Design
 
-This repository contains the design calculations and component values for operational amplifier circuits performing specific mathematical summations and subtractions.
-
-## 1. Design circuit A: Inverting Summer
+## 2. Design circuit A: Inverting Summer
 **Target Equation:** $y_1(t) = -[5x_1(t) + x_2(t)]$
-
 
 
 ### Design Methodology
@@ -82,11 +78,11 @@ $$V_{out} = -\left( \frac{R_f}{R_1}x_1 + \frac{R_f}{R_2}x_2 \right)$$
 | **Part (a)** | $-3.0\text{V}$ |
 
 
-## DC Analysis
+## 3.DC Analysis
 
 <img width="1505" height="856" alt="image" src="https://github.com/user-attachments/assets/ffb00391-3528-4930-8eaf-061872d0cbb2" />
 
-## Simulation Results: DC Operating Point Analysis (Part A)
+##  Simulation Results: DC Operating Point Analysis (Part A)
 
 The circuit for ($y_1(t) = -[5x_1(t) + x_2(t)]$) was simulated using LTspice with a $\mu A741$ Op-Amp model in an **Inverting Summing Amplifier** configuration.
 
@@ -120,10 +116,10 @@ This extremely low voltage (in the microvolt range) validates that the negative 
 The simulation shows $I(R_5) = I(R_7) + I(R_6)$, satisfying Kirchhoff’s Current Law (KCL) at the summing node.
 
 ---
-### Conclusion
+###  Conclusion
 The DC analysis for Part A proves that the inverting summer configuration is highly accurate. The minor microvolt offset at the summing node is attributed to the non-ideal characteristics (input offset voltage and bias current) of the $\mu A741$ model.
 
-## Transient Analysis
+## 4.Transient Analysis
 
 <img width="1918" height="852" alt="image" src="https://github.com/user-attachments/assets/853c9499-8f18-4bc4-bc39-ea654094a67b" />
 
@@ -150,7 +146,7 @@ The plot shows the output (red line) exactly at the **$-3.0\text{V}$** division,
 ### Conclusion
 The transient analysis for Part A successfully demonstrates the circuit's ability to sum multiple DC signals with specific gains. The results are consistent with the DC operating point analysis and confirm the theoretical design parameters
 
-## 2. Design circuit B: Difference Amplifier
+## 5. Design circuit B: Difference Amplifier
 **Target Equation:** $y_2(t) = x_1(t) - 3x_2(t)$
 
 
@@ -190,7 +186,7 @@ If we choose $R_4 = 10 \text{ k}\Omega$, then $R_3 = 30 \text{ k}\Omega$.
 | **Part (b)** | $-1.0\text{V}$ |
 
 
-### Simulation Results: DC Operating Point Analysis (Part B)
+### 5.DC Operating Point Analysis (Part B)
 
 <img width="1537" height="655" alt="image" src="https://github.com/user-attachments/assets/e96cdfe1-af7a-4ef0-8475-af11dbe638c5" />
 
@@ -220,7 +216,7 @@ In an ideal op-amp, the voltages at the inverting and non-inverting terminals sh
 - **Inverting Node (V_n001):** $0.1244V$.
 The negligible difference confirms the op-amp is operating correctly within its linear region and maintaining the virtual ground/short principle.
 
-## Transient Analysis
+## 6.Transient Analysis
 
 <img width="1915" height="530" alt="image" src="https://github.com/user-attachments/assets/da64e3ec-2943-40aa-8f95-1ab6cbfd8d64" />
 
@@ -251,7 +247,7 @@ Both the **DC Operating Point** and **Transient Analysis** successfully validate
 
 ---
 
-## Inference 
+## 7.Inference 
 
 The experiment successfully demonstrated the design and validation of Operational Amplifier circuits for performing specific mathematical operations: weighted summation (Inverting Summer) and subtraction (Difference Amplifier).
 
@@ -273,8 +269,6 @@ The theoretical calculations using standard Op-Amp topologies were verified thro
 | **Task A** | Inverting Summation | $-3.00\text{V}$ | $-2.998\text{V}$ |
 | **Task B** | Subtraction | $-1.00\text{V}$ | $-0.999\text{V}$ | 
 
-### Final Remark
-Operational amplifiers provide a robust and highly accurate method for analog signal processing. By carefully selecting resistor networks, complex linear equations can be solved in real-time without the need for digital processing. The high degree of correlation between our mathematical models and the LTspice simulations confirms the reliability of these analog computing blocks for engineering applications.
 
 
 
