@@ -46,6 +46,7 @@ $$V_{out(pp)} = 5 \times 12\text{ V} = 60\text{ V}$$
 | **Gain ($A_v$)** | $5\text{ V/V}$ |
 | **Input Resistor ($R_1$)** | $1\text{ k}\Omega$ |
 | **Feedback Resistor ($R_f$)** | $4\text{ k}\Omega$ |
+|**Input Voltage: $V_{in(pp)}**| $12\text{ V}$ |
 
 
 ### Circuit Diagram
@@ -114,7 +115,7 @@ $$GBWP = A_v \times f_c$$
 $$GBWP = 5 \times 211.695\text{ kHz}$$
 $$GBWP = 1.058\text{ MHz}$$
 
-## Part E: Voltage Follower (Unity-Gain Buffer)
+## Part B: Voltage Follower (Unity-Gain Buffer)
 
 ### 1. Theory
 A **Voltage Follower** (also known as a unity-gain amplifier or buffer) is an operational amplifier circuit where the output voltage exactly tracks the input voltage. This is achieved by connecting the output directly to the inverting (-) terminal, creating 100% negative feedback, while applying the input signal to the non-inverting (+) terminal.
@@ -162,13 +163,79 @@ Typical standard op-amps can source/sink around $20\text{ mA}$, so a $2.73\text{
 | Parameter | Value |
 | :--- | :--- |
 | **Gain ($A_v$)** | $1\text{ V/V}$ |
+|**Input Voltage: $V_{in(pp)}**|12\text{ V}|
 | **Feedback Resistor ($R_f$)** | $0\text{ }\Omega$ (Direct Short) |
 | **Input Resistor ($R_1$)** | $\infty\text{ }\Omega$ (Not Used) |
 | **Theoretical $V_{out(pp)}$** | $12\text{ V}$ |
 | **Peak Load Current ($I_L$)** | $2.73\text{ mA}$ |
-
 ---
+#### Circuit Diagram:
+
+<img width="902" height="606" alt="image" src="https://github.com/user-attachments/assets/05054366-0be2-4fb9-b905-fd4b3bc45297" />
+
 
 ### 3. Expected Waveforms
 The transient analysis will show two perfectly overlapping sine waves. The green output trace ($V_{out}$) will be identical in amplitude ($12\text{ V}$ peak-to-peak) and phase to the red input trace ($V_{in}$), with no clipping or distortion.
+
+## 4. Transient Analysis Simulation
+<img width="1912" height="552" alt="image" src="https://github.com/user-attachments/assets/fe017a7d-2b43-475d-a3ba-aea0ea8ceb4c" />
+
+
+The LTspice transient simulation plot verifies the theoretical behavior of the voltage follower (unity-gain buffer) circuit. 
+
+### Waveform Observations
+* **Input Signal (`V(vin1)`, Red Trace - Bottom):** A sinusoidal input waveform. Based on the graph axes, the amplitude is set to **5V peak** (**10V peak-to-peak**), with a period of **0.5 ms**, which corresponds to a frequency of **2 kHz**. *(Note: This input amplitude is slightly lower than the 12Vpp specified in the theoretical calculations, but perfectly demonstrates the circuit's operation).*
+* **Output Signal (`V(vout1)`, Blue Trace - Top):** The resulting output waveform from the op-amp. 
+
+### Key Characteristics Demonstrated
+1. **Unity Voltage Gain:** The amplitude of the blue output trace is exactly **5V peak**, perfectly matching the input amplitude. The measured voltage gain ($A_v$) is therefore exactly **1 V/V**.
+2. **Zero Phase Shift:** The peaks and zero-crossings of `V(vout1)` align perfectly with `V(vin1)`. There is a $0^\circ$ phase shift, confirming the non-inverting nature of the configuration.
+3. **Linear Operation (No Distortion):** Because the **5V peak** output is well within the power supply limits (typically ±15V), the op-amp operates entirely in its linear region. Unlike the previous high-gain amplifier, there is absolutely no clipping or saturation at the peaks.
+
+### Conclusion
+The transient analysis successfully proves that the voltage follower circuit acts as a perfect buffer. The output voltage completely mirrors the input voltage in both magnitude and phase while ideally providing high input impedance and low output impedance to isolate stages in a larger circuit design.
+
+## 5. AC Analysis (Frequency Response)
+
+<img width="1913" height="612" alt="image" src="https://github.com/user-attachments/assets/8ef7ec00-8352-49f3-b371-60b5727abdeb" />
+
+### Extracted Parameters
+
+Based on a visual analysis of the Bode plot, we can determine the following key AC characteristics:
+
+#### 1. Mid-Band Voltage Gain
+* The solid magnitude trace is perfectly flat in the low-to-mid frequency range and rests exactly on the $0\text{ dB}$ gridline.
+* $$A_{v(dB)} = 0\text{ dB}$$
+$$A_v = 10^{(0/20)} = 1\text{ V/V}$$
+
+*Conclusion: The circuit perfectly operates as a unity-gain buffer.*
+
+#### 2. Upper Cut-off Frequency ($f_H$ or $f_{-3dB}$)
+The upper cut-off frequency is the point where the power of the output signal drops by half, which corresponds to a voltage magnitude drop of $-3\text{ dB}$. 
+
+* ** the Cut-off Frequency ($f_c$) = $1.38\text{ MHz}$**
+
+#### 3. Gain-Bandwidth Product (GBWP)
+For an operational amplifier, the Gain-Bandwidth Product is a constant value. Because the voltage follower has a closed-loop linear gain of exactly $1\text{ V/V}$, its cut-off frequency is equal to the op-amp's unity-gain frequency ($f_{unity}$).
+$$GBWP = A_v \times f_c$$
+$$GBWP = 1 \times 1.38\text{ MHz}$$
+$$GBWP = 1.38\text{ MHz}$$
+
+## 6. Overall Experiment Inference (Conclusions)
+
+**1. Verification of Closed-Loop Gain and Phase**
+The experiments successfully validated the theoretical gain equations for non-inverting op-amp configurations. 
+* In **Part D**, establishing a resistor ratio of $R_f/R_1 = 4$ accurately produced a voltage gain of exactly $5\text{ V/V}$ ($13.98\text{ dB}$). 
+* In **Part E**, replacing the feedback network with a direct short ($100\%$ negative feedback) yielded a perfect unity gain of $1\text{ V/V}$ ($0\text{ dB}$). 
+* Furthermore, both transient analyses confirmed a $0^\circ$ phase shift, proving that signals applied to the non-inverting terminal remain in phase at the output.
+
+
+**3. The Gain-Bandwidth Trade-off**
+The AC analyses of both circuits clearly demonstrated the constant nature of the Gain-Bandwidth Product (GBWP). There is an inherent trade-off between how much an op-amp can amplify a signal and the maximum frequency it can handle:
+* The amplifier in **Part D** (Gain = $5$) experienced an early roll-off, restricting its usable bandwidth to approximately **$211.7\text{ kHz}$**.
+* The voltage follower in **Part E** (Gain = $1$) has low voltage amplification to achieve maximum frequency response, extending its usable bandwidth to the op-amp's unity-gain frequency of approximately **$1.38\text{ MHz}$**.
+
+**Final Summary:**
+The non-inverting amplifier is highly effective for magnifying signal voltage, provided the output remains within saturation limits. The voltage follower, while providing no voltage amplification, acts as an ideal buffer—offering maximum bandwidth, perfect signal tracking, high input impedance, and the ability to drive loads without drawing current from the signal source.
+
 
